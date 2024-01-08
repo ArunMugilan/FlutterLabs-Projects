@@ -8,7 +8,7 @@ import 'History.dart';
 class BookParking extends StatefulWidget {
   final String parkingSpot;
 
-  const BookParking({required this.parkingSpot, Key? key}) : super(key: key);
+  const BookParking({required this.parkingSpot, Key? key, required  selectedSlot}) : super(key: key);
 
   @override
   _BookParkingState createState() => _BookParkingState();
@@ -86,7 +86,7 @@ class _BookParkingState extends State<BookParking> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Parking'),
+        title: const Text('Book Parking'),
         backgroundColor: Colors.black,
       ),
       body: Padding(
@@ -100,10 +100,10 @@ class _BookParkingState extends State<BookParking> {
                 Center(
                   child: Text(
                     'Selected Parking Spot: ${widget.parkingSpot}',
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -118,7 +118,7 @@ class _BookParkingState extends State<BookParking> {
                                 value: type,
                                 child: Text(
                                   type,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ))
                           .toList(),
@@ -135,7 +135,7 @@ class _BookParkingState extends State<BookParking> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -149,7 +149,7 @@ class _BookParkingState extends State<BookParking> {
                           _vehiclePlateNumber = value;
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Vehicle Plate Number',
                         border: InputBorder.none,
                       ),
@@ -162,7 +162,7 @@ class _BookParkingState extends State<BookParking> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -174,10 +174,10 @@ class _BookParkingState extends State<BookParking> {
                       children: [
                         Text(
                           'Start Time: $_startTime',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         IconButton(
-                          icon: Icon(Icons.access_time),
+                          icon: const Icon(Icons.access_time),
                           onPressed: () async {
                             TimeOfDay? pickedTime = await showTimePicker(
                               context: context,
@@ -195,7 +195,7 @@ class _BookParkingState extends State<BookParking> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -207,10 +207,10 @@ class _BookParkingState extends State<BookParking> {
                       children: [
                         Text(
                           'End Time: $_endTime',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         IconButton(
-                          icon: Icon(Icons.access_time),
+                          icon: const Icon(Icons.access_time),
                           onPressed: () async {
                             TimeOfDay? pickedTime = await showTimePicker(
                               context: context,
@@ -228,7 +228,7 @@ class _BookParkingState extends State<BookParking> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -238,11 +238,11 @@ class _BookParkingState extends State<BookParking> {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       'Parking Charge: RM $_parkingCharge',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

@@ -1,10 +1,8 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
+import 'package:smart_parking/themes/ColourThemes.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_parking/models/users.dart';
 import 'package:smart_parking/screens/Complaint.dart';
-import 'package:smart_parking/screens/Login.dart';
 
 import 'EditProfile.dart';
 
@@ -18,21 +16,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: c4,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          'Profile',
-          style: TextStyle(color: Colors.black),
-        ),
+        elevation: 0,
+        backgroundColor: c4,
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.edit,
               color: Colors.black,
             ),
@@ -46,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.logout,
               color: Colors.black,
             ),
@@ -54,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 "/login",
-                    (route) => false,
+                (route) => false,
               );
             },
           ),
@@ -64,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Icon(
                 Icons.person_rounded,
@@ -75,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 33),
               ),
               const SizedBox(
-                height: 15,
+                height: 50,
               ),
               Card(
                 elevation: 4.0,
@@ -102,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         widget.user.usertype,
                         style: const TextStyle(
@@ -110,28 +104,44 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       OutlinedButton(
                         onPressed: () => Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => EditProfileScreen(user: widget.user)),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  EditProfileScreen(user: widget.user)),
                         ),
-                        style: OutlinedButton.styleFrom(backgroundColor: Colors.white),
-                        child: Text('Edit Profile', style: TextStyle(color: Colors.black),),
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.white),
+                        child: const Text(
+                          'Edit Profile',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 25,),
-              Text('If you have any complaint, do let us know', style: TextStyle(color: Colors.black),),
+              const SizedBox(
+                height: 25,
+              ),
+              const Text(
+                'If you have any complaint, do let us know',
+                style: TextStyle(color: Colors.black),
+              ),
               OutlinedButton(
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ComplaintPage()),
+                  MaterialPageRoute(builder: (context) => const ComplaintPage()),
                 ),
                 style: OutlinedButton.styleFrom(backgroundColor: Colors.white),
-                child: Text('Complaints', style: TextStyle(color: Colors.black),),
+                child: const Text(
+                  'Complaints',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),

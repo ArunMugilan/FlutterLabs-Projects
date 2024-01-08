@@ -40,12 +40,12 @@ dependencies:
   card_swiper: ^3.0.1
   http: ^1.1.0
   image_picker: ^1.0.6
+  google_maps_flutter: ^2.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   url_launcher: 6.2.2
-  google_maps_flutter: ^2.5.0
   firebase_auth: ^4.15.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -73,6 +73,8 @@ flutter:
      - images/8960722.jpg
      - images/parkingmadeeasy.jpg
      - images/54065.jpg
+     - images/parking1.jpg
+     - images/parking2.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

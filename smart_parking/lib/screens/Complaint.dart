@@ -105,7 +105,6 @@ class _ComplaintPageState extends State<ComplaintPage> {
             color: c1,
           ),
         ),
-        leading: Icon(Icons.arrow_back_sharp, color: c1,),
       ),
       body: Column(
         children: [

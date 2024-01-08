@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Booking History'),
-      ),
+    return const Scaffold(
       body: Center(
         child: Text('Booking History Page'),
       ),

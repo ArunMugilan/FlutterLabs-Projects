@@ -23,8 +23,8 @@ class _DashboardState extends State<Dashboard> {
   void initPages() {
     _pages = [
       ParkingSpacePage(),
-      widget.user.usertype == 'admin' ? AddParkingPage() : HistoryPage(),
-      HistoryPage(),
+      if (widget.user.usertype == 'admin') AddParkingPage(user: widget.user,),
+      if (widget.user.usertype != 'admin') HistoryPage(),
       ProfilePage(
         user: widget.user,
       ),
@@ -34,7 +34,6 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     initPages();
-
     super.initState();
   }
 
@@ -63,20 +62,22 @@ class _DashboardState extends State<Dashboard> {
         selectedItemColor: Colors.black,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(Icons.local_parking),
             label: 'Parking Space',
           ),
-          // BottomNavigationBarItem(
-          //    icon: Icon(Icons.add), // Icon for admin to add parking
-          //    label: 'Add Parking',
-          //  ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
+          if (widget.user.usertype == 'admin')
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: 'Add Parking',
+            ),
+          if (widget.user.usertype != 'admin')
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'History',
+            ),
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),

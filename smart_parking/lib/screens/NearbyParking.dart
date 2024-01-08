@@ -102,8 +102,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:smart_parking/models/ParkingSpot.dart';
-
-import 'BookParking.dart'; // Import your ParkingSpot model
+import 'BookParking.dart';
+import 'ParkingDetails.dart';
 
 class NearbyParking extends StatefulWidget {
   @override
@@ -111,102 +111,91 @@ class NearbyParking extends StatefulWidget {
 }
 
 class _NearbyParkingState extends State<NearbyParking> {
-  // Assume you have a list of ParkingSpot objects
   List<ParkingSpot> parkingSpots = [
     ParkingSpot(
         id: '1',
         address: '123 Main St',
         numberOfParkingLots: 10,
-        imageUrl: 'image1.jpg'),
+        imageUrl: 'parking1.jpg'),
     ParkingSpot(
         id: '2',
         address: '456 Oak St',
         numberOfParkingLots: 15,
-        imageUrl: 'image2.jpg'),
+        imageUrl: 'parking2.jpg'),
     // Add more parking spots as needed
   ];
 
+  List<ParkingSpot> filteredParkingSpots = [];
+
+  final TextEditingController _searchController = TextEditingController();
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Nearby Parking'),
-      ),
-      body: ListView.builder(
-        itemCount: parkingSpots.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(parkingSpots[index].address),
-            subtitle: Text(
-                'Available lots: ${parkingSpots[index].numberOfParkingLots}'),
-            leading: Image.network(
-              parkingSpots[index].imageUrl,
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-            ),
-            onTap: () {
-              // Navigate to the parking details screen when a spot is tapped
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ParkingDetails(parkingSpot: parkingSpots[index]),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
+  void initState() {
+    filteredParkingSpots = parkingSpots;
+    super.initState();
   }
-}
 
-class ParkingDetails extends StatelessWidget {
-  final ParkingSpot parkingSpot;
-
-  const ParkingDetails({Key? key, required this.parkingSpot}) : super(key: key);
+  void searchParking(String query) {
+    setState(() {
+      filteredParkingSpots = parkingSpots
+          .where((spot) => spot.address.toLowerCase().contains(query.toLowerCase())).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Implement the parking details screen here
-    // Include an option to book the parking spot
     return Scaffold(
       appBar: AppBar(
-        title: Text('Parking Details'),
+        title: const Text('Nearby Parking'),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20,),
-          Hero(
-            tag: 'parkingSpotImage${parkingSpot.id}', // Unique tag for each image
-            child: Image.network(
-              parkingSpot.imageUrl,
-              width: 200,
-              height: 200,
-              fit: BoxFit.cover,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              onChanged: searchParking,
+              decoration: InputDecoration(
+                labelText: "Search Parking",
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
           ),
-          SizedBox(height: 16),
-          Text('Address: ${parkingSpot.address}'),
-          Text('Available lots: ${parkingSpot.numberOfParkingLots}'),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const BookParking(
-                    parkingSpot: '',
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredParkingSpots.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(filteredParkingSpots[index].address),
+                  subtitle: Text(
+                      'Available lots: ${filteredParkingSpots[index].numberOfParkingLots}'),
+                  leading: Image.network(
+                    filteredParkingSpots[index].imageUrl,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
                   ),
-                ),
-              );
-            },
-            child: const Text('Book Parking'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ParkingDetails(
+                            parkingSpot: filteredParkingSpots[index]),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
     );
   }
 }
-
